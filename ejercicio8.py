@@ -18,26 +18,26 @@
 #ejecute en pantalla la siguiente accion: digita tu numero de cedula
 #saber el numero de silla donde fue asignado
 
-print("Admision para entrar")
+print(----------"Admision para entrar"----------)
+
 
 nombre=str(input("Ingrese su nombre"))
 edad=int(input("Ingrese su edad"))
 Identificacion=int(input("Ingrese su identificacion"))
+#Definir la ubicacion a partir de la Zona corresponidente
+ZonaA=["1","2","3","4","5"]
+ZonaB=["6","7","8","9","10"]
+ZonaC=["11","12","13","14","15"]
 if edad >= 18:
      edad>=18 and edad<=25
      ubicacion="Zona A"
-     ZonaA=["1","2","3","4","5"]
-     print(ZonaA)
+     print(ubicacion,ZonaA)
+     
 elif edad>=26 and edad<=34:
      ubicacion="Zona B"
-     edad
-     print("correcta")
+     print(ubicacion,ZonaB)
 else:
       ubicacion="Zona C" 
-      edad<18
-      print("edad incorrecta") 
+      print(ubicacion,ZonaC)
 datos=(nombre,edad,Identificacion,ubicacion)
-
-#edad=(18<1)
-#print("Edad incorrecta")
 print(datos)
