@@ -18,26 +18,28 @@
 #ejecute en pantalla la siguiente accion: digita tu numero de cedula
 #saber el numero de silla donde fue asignado
 
-print(----------"Admision para entrar"----------)
+print("Admisión para entrar")
 
-
-nombre=str(input("Ingrese su nombre"))
-edad=int(input("Ingrese su edad"))
-Identificacion=int(input("Ingrese su identificacion"))
-#Definir la ubicacion a partir de la Zona corresponidente
-ZonaA=["1","2","3","4","5"]
-ZonaB=["6","7","8","9","10"]
-ZonaC=["11","12","13","14","15"]
-if edad >= 18:
-     edad>=18 and edad<=25
-     ubicacion="Zona A"
-     print(ubicacion,ZonaA)
-     
-elif edad>=26 and edad<=34:
-     ubicacion="Zona B"
-     print(ubicacion,ZonaB)
-else:
-      ubicacion="Zona C" 
-      print(ubicacion,ZonaC)
-datos=(nombre,edad,Identificacion,ubicacion)
-print(datos)
+while True:
+    nombre = input("Ingrese su nombre: ")
+    edad = int(input("Ingrese su edad: "))
+    identificacion = int(input("Ingrese su identificación: "))
+    
+    ubicacion = None
+    
+    while ubicacion is None:
+        if 18 <= edad <= 25:
+            ubicacion = "Zona A"
+            zona = ["1", "2", "3", "4", "5"]
+        elif 26 <= edad <= 34:
+            ubicacion = "Zona B"
+            zona = ["6", "7", "8", "9", "10"]
+        else:
+            ubicacion = "Zona C"
+            zona = ["11", "12", "13", "14", "15"]
+    
+    print("Ubicación:", ubicacion)
+    print("Lista de ubicación:", zona)
+    
+    datos = (nombre, edad, identificacion, ubicacion)
+    print("Datos de admisión:", datos)
