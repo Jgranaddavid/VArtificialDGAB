@@ -1,35 +1,39 @@
 import random
+
 print("------------------- Asignacion de tareas-------------------")
-#Asignacion de tareas.
-tareas=[
-    { "nombre":"Tarea 1",
-     "descripcion":"Realizar una serie de actividades diarias a partir de esta lista",
-     "instrucciones":[
-         "Levantarse",
-         "Irse a cepillar los dientes",
-         "Tender la cama",
-         "Irse a bañar",
-         "Ponerse la ropa(opciones:Op1:Camisa,Traje de paño,corbata,zapatos,cinturos,reloj,pantalon,boxers,Op2:Chaqueta,Camisa,Jean,Boxers,mediasTenis,)",
-         "Desayunarse",
-         "Salir de la casa",
-         "Coger el autobus",
-         "Trabajar hasta las 12:30",
-         "Buscar un restaurante",
-         "Almorzar aprozimadamente una hora",
-         "Regresar al trabajo",
-         "Trabajar",
-         "Salir de trabajar",
-         "Coger el autobus",
-         "Regresar a la casa",
-         "Preparar la cena",
-         "Quitarse la ropa",
-         "Ponerse algo comodo",
-         "Comer",
-         "Ver la television:op",
-         "Irse a dormir"
-      ]
-   },  
-   {
+
+# Asignacion de tareas.
+tareas = [
+    {
+        "nombre": "Tarea 1",
+        "descripcion": "Realizar una serie de actividades diarias a partir de esta lista",
+        "instrucciones": [
+            "Levantarse",
+            "Irse a cepillar los dientes",
+            "Tender la cama",
+            "Irse a bañar",
+            "Ponerse la ropa (opciones: Op1: Camisa, Traje de paño, corbata, zapatos, cinturón, reloj, pantalón, boxers, Op2: Chaqueta, Camisa, Jean, Boxers, medias, Tenis)",
+            "Desayunarse",
+            "Salir de la casa",
+            "Coger el autobús",
+            "Trabajar hasta las 12:30",
+            "Buscar un restaurante",
+            "Almorzar aproximadamente una hora",
+            "Regresar al trabajo",
+            "Trabajar",
+            "Salir de trabajar",
+            "Coger el autobús",
+            "Regresar a la casa",
+            "Preparar la cena",
+            "Quitarse la ropa",
+            "Ponerse algo cómodo",
+            "Comer",
+            "Ver la televisión: op",
+            "Irse a dormir"
+        ],
+        "puntaje": 10,  # Puntaje asignado a esta tarea
+    },
+    {
         "nombre": "Tarea 2",
         "descripcion": "Día de trabajo en casa.",
         "instrucciones": [
@@ -46,7 +50,8 @@ tareas=[
             "Hacer ejercicio",
             "Cenar",
             "Relajarse antes de dormir"
-             ]
+        ],
+        "puntaje": 8,  # Puntaje asignado a esta tarea
     },
     {
         "nombre": "Tarea 3",
@@ -61,10 +66,11 @@ tareas=[
             "Cocinar una cena especial",
             "Ver una película o serie",
             "Relajarse antes de dormir"
-        ]
+        ],
+        "puntaje": 12,  # Puntaje asignado a esta tarea
     },
     {
-     "nombre": "Tarea 4",
+        "nombre": "Tarea 4",
         "descripcion": "Fin de semana de actividades diversas.",
         "instrucciones": [
             "Día Sábado:",
@@ -79,8 +85,9 @@ tareas=[
             "  - Visitar un museo o galería de arte",
             "  - Llamar o visitar a familiares o amigos",
             "  - Hacer una cena especial en casa"
-        ]
-     },
+        ],
+        "puntaje": 15,  # Puntaje asignado a esta tarea
+    },
     {
         "nombre": "Tarea 5",
         "descripcion": "Tareas de limpieza y organización.",
@@ -93,9 +100,12 @@ tareas=[
             "Reorganizar muebles",
             "Hacer una lista de tareas pendientes",
             "Descansar y disfrutar de un momento de relajación"
-        ]
+        ],
+        "puntaje": 5,  # Puntaje asignado a esta tarea
     }
-    ]
+]
+
+# Función para mostrar las instrucciones de una tarea
 def mostrar_instrucciones(tarea):
     print(f"Instrucciones para '{tarea['nombre']}':")
     for paso in tarea['instrucciones']:
@@ -104,6 +114,7 @@ def mostrar_instrucciones(tarea):
 # Contadores e historial
 contador_tareas_realizadas = {tarea['nombre']: 0 for tarea in tareas}
 historial_tareas_realizadas = []
+puntaje_total = 0
 
 # Programa principal
 print("------------------- Iniciar programa -------------------")
@@ -121,21 +132,26 @@ while True:
     
     if respuesta == 'si':
         tarea_realizada = tarea_aleatoria['nombre']
+        puntaje_obtenido = tarea_aleatoria['puntaje']
         contador_tareas_realizadas[tarea_realizada] += 1
-        historial_tareas_realizadas.append(tarea_realizada)
+        historial_tareas_realizadas.append((tarea_realizada, puntaje_obtenido))
+        puntaje_total += puntaje_obtenido
     
     respuesta = input("¿Quieres ver otra tarea aleatoria? (Si/No): ").lower()
     if respuesta != 'si':
         break
 
-# Mostrar resumen de tareas realizadas
-print("\nResumen de tareas realizadas:")
+# Mostrar resumen de tareas realizadas con puntajes
+print("\nResumen de tareas realizadas con puntajes:")
 for tarea, contador in contador_tareas_realizadas.items():
-    print(f"{tarea}: {contador} veces")
+    print(f"{tarea}: {contador} veces - Puntaje total: {contador * tareas[0]['puntaje']}")
 
-# Mostrar historial de tareas realizadas
-print("\nHistorial de tareas realizadas:")
-for tarea_realizada in historial_tareas_realizadas:
-    print(tarea_realizada)
+# Mostrar historial de tareas realizadas con puntajes
+print("\nHistorial de tareas realizadas con puntajes:")
+for tarea_realizada, puntaje_obtenido in historial_tareas_realizadas:
+    print(f"{tarea_realizada} - Puntaje: {puntaje_obtenido}")
+
+# Mostrar puntaje total
+print(f"\nPuntaje Total: {puntaje_total}")
 
 print("\n------------------- Fin del programa -------------------")
