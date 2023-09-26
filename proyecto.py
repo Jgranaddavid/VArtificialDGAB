@@ -96,12 +96,14 @@ tareas=[
         ]
     }
     ]
-# Función para mostrar las instrucciones de una tarea
 def mostrar_instrucciones(tarea):
     print(f"Instrucciones para '{tarea['nombre']}':")
     for paso in tarea['instrucciones']:
         print(f"- {paso}")
 
+# Contadores e historial
+contador_tareas_realizadas = {tarea['nombre']: 0 for tarea in tareas}
+historial_tareas_realizadas = []
 
 # Programa principal
 print("------------------- Iniciar programa -------------------")
@@ -115,7 +117,25 @@ while True:
     input("Presiona Enter para ver las instrucciones...")
     
     mostrar_instrucciones(tarea_aleatoria)
-    respuesta=input("Quieres ver otra tarea aleatoria(Si/No)")
+    respuesta = input("¿Has completado esta tarea? (Si/No): ").lower()
+    
+    if respuesta == 'si':
+        tarea_realizada = tarea_aleatoria['nombre']
+        contador_tareas_realizadas[tarea_realizada] += 1
+        historial_tareas_realizadas.append(tarea_realizada)
+    
+    respuesta = input("¿Quieres ver otra tarea aleatoria? (Si/No): ").lower()
     if respuesta != 'si':
         break
-    
+
+# Mostrar resumen de tareas realizadas
+print("\nResumen de tareas realizadas:")
+for tarea, contador in contador_tareas_realizadas.items():
+    print(f"{tarea}: {contador} veces")
+
+# Mostrar historial de tareas realizadas
+print("\nHistorial de tareas realizadas:")
+for tarea_realizada in historial_tareas_realizadas:
+    print(tarea_realizada)
+
+print("\n------------------- Fin del programa -------------------")
