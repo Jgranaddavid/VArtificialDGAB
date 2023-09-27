@@ -113,8 +113,7 @@ def mostrar_instrucciones(tarea):
 
 # Contadores e historial
 contador_tareas_realizadas = {tarea['nombre']: 0 for tarea in tareas}
-historial_tareas_realizadas = []
-puntaje_total = 0
+historial_tareas_realizadas = {tarea['nombre']: 0 for tarea in tareas}
 
 # Programa principal
 print("------------------- Iniciar programa -------------------")
@@ -134,8 +133,7 @@ while True:
         tarea_realizada = tarea_aleatoria['nombre']
         puntaje_obtenido = tarea_aleatoria['puntaje']
         contador_tareas_realizadas[tarea_realizada] += 1
-        historial_tareas_realizadas.append((tarea_realizada, puntaje_obtenido))
-        puntaje_total += puntaje_obtenido
+        historial_tareas_realizadas[tarea_realizada] += puntaje_obtenido
     
     respuesta = input("¿Quieres ver otra tarea aleatoria? (Si/No): ").lower()
     if respuesta != 'si':
@@ -143,15 +141,22 @@ while True:
 
 # Mostrar resumen de tareas realizadas con puntajes
 print("\nResumen de tareas realizadas con puntajes:")
-for tarea, contador in contador_tareas_realizadas.items():
-    print(f"{tarea}: {contador} veces - Puntaje total: {contador * tareas[0]['puntaje']}")
+for tarea in tareas:
+    nombre_tarea = tarea['nombre']
+    contador = contador_tareas_realizadas[nombre_tarea]
+    puntaje_total = historial_tareas_realizadas[nombre_tarea]
+    print(f"{nombre_tarea}: {contador} veces - Puntaje total: {puntaje_total}")
 
 # Mostrar historial de tareas realizadas con puntajes
 print("\nHistorial de tareas realizadas con puntajes:")
-for tarea_realizada, puntaje_obtenido in historial_tareas_realizadas:
-    print(f"{tarea_realizada} - Puntaje: {puntaje_obtenido}")
+for tarea, puntaje_obtenido in historial_tareas_realizadas.items():
+    print(f"{tarea} - Puntaje: {puntaje_obtenido}")
 
-# Mostrar puntaje total
-print(f"\nPuntaje Total: {puntaje_total}")
+# Calcular el puntaje total general
+puntaje_total_general = sum(historial_tareas_realizadas.values())
+
+# Mostrar puntaje total general
+print(f"\nPuntaje Total General: {puntaje_total_general}")
 
 print("\n------------------- Fin del programa -------------------")
+
